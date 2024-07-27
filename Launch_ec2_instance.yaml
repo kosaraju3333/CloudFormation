@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This Template will create a ec2 Instance
+Resources:
+  JenkinsEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: string
+      InstanceType: t2.small
+      KeyName: my_work
+      SecurityGroupIds: 
+        - string
+        - string
+      SubnetId: string
+      Tags:
+        - Key: Name
+          Value: Jenkins-Terraform-VM
+        - Key: Owner
+          Value: DevOps-Team
+
