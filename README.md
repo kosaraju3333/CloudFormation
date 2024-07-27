@@ -1,1 +1,31 @@
 # CloudFormation
+-  What is Cloud Formation Template
+	- Cloud Formation Templets are used to create infrastructure on AWS 
+	- They implement the principles of IaC (Infrastructure as Code)
+	- User need to submit Templets to IaC tool like cloud Formation
+	- Templets are written in following languages 
+			- YAML
+			- Json
+			- Declarative 
+			- Versioned 
+- IaC Principles
+	- Declarative
+	- Versioned
+- Features of Cloud Formation Templates
+	- Creation of Infrastructure 
+	- Drift Detection 
+		- eg: Let's say you have created S3 bucket with version enabled using CFT, but some one from AWS console disable S3 bucket versioning.
+		- CFT can detect the drift(changes) by enabling this option in CFT. like some one has modified the infra which is created through CFT.
+- Stacks
+	- Its implements the templates 
+- CFT Structure 
+	- What are the different components that we write in YAML file
+		- Version of CFT
+		- Description
+		- Metadata information
+		- Parameters (like variables pass during the run time)
+		- Define some rules (eg: Validate the parameters that are submitted by user)
+		- Mappings (Assigning parameters to Variables ) Mapp a variable to parameter 
+		- Conditions
+		- Resources (This is Mandatory for CFT)
+		- Outputs of Templates (I will give the specific resource info we requested )
