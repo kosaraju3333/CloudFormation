@@ -7,6 +7,7 @@ Resources:
       ImageId: string
       InstanceType: t2.small
       KeyName: my_work
+      AvailabilityZone: String
       SecurityGroupIds: 
         - string
         - string
