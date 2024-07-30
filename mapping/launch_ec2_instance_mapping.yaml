@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This Template will create a ec2 Instance using parameters
+Parameters:
+#### String Parameters ####
+  MyAvailabilityZone:
+    Description: Select the AvailabilityZone
+    Type: String
+    Default: us-east-1a
+    AllowedValues:
+      - us-east-1a
+      - us-east-1b
+      - ap-south-1a
+
+### SSM Parameter ###
+  MyInstanceType:
+    Description: Select the InstanceType from the SSM Paremeters
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: Jenkins-InstanceType
+
+### CommaDelimitedList Parameter it is useful when you need to provide multiple values for a single property ####
+  MySecurityGroupIds:
+    Description: Comma-delimited list of three SecurityGroupIds
+    Type: CommaDelimitedList
+    Default: sg-ID_1, sg-ID_2
+
+### Creating Mappings ###
+#if you want to set values ​​based on region, 
+#you can create a mapping between the region acting as the key with the specified values ​​located in the region where the template is deployed.
+Mappings:
+  MySubnetIDMap:
+    us-east-1:
+      MySubnetID1: SubnetID_1
+      MySubnetID2: SubnetID_2
+
+    ap-south-1:
+      MySubnetID1: SubnetID_1
+      MySubnetID2: SubnetID_2
+    
+    
+Resources:
+### Creating Jenkins EC2Instance
+  JenkinsEC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-02b91a46e15da2494 
+      InstanceType: !Ref MyInstanceType
+      KeyName: my_work
+      AvailabilityZone: !Ref MyAvailabilityZone
+      SecurityGroupIds: !Ref MySecurityGroupIds
+      SubnetId: !FindInMap [MySubnetIDMap, !Ref "AWS::Region", MySubnetID1]
+      Tags:
+        - Key: Name
+          Value: Jenkins-CFT-VM
+        - Key: Owner
+          Value: DevOps-Team

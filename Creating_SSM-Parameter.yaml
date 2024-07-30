@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This Template will create AWS SSM Parameters
+
+Parameters:
+#### String Parameters ####
+  MySSMParameterValue:
+    Description: Select the SSM Parameter Value from the List
+    Type: String
+    Default: t2.small
+    AllowedValues:
+      - t2.small
+      - t2.medium
+      - t2.large
+
+Resources:
+### Creating SSM Paremeter in AWS for Jenkins Insatnce Type
+  JenkinsInstanceTypeSSMParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: Creting Jenkjns instance type SSM Parameter
+      Name: Jenkins-InstanceType
+      Value: !Ref MySSMParameterValue
+      Type: String
+      Tier: Standard
+      DataType: text
